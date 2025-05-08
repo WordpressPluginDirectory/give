@@ -34,12 +34,15 @@ declare module "@wordpress/data" {
 export type GiveCampaignOptions = {
     isAdmin: boolean;
     adminUrl: string;
+    apiRoot: string;
+    apiNonce: string;
     campaignsAdminUrl: string;s
     currency: string;
     isRecurringEnabled: boolean;
     defaultForm: string;
     admin: {
         showCampaignInteractionNotice: boolean
+        showFormGoalNotice: boolean
         showExistingUserIntroNotice: boolean
         showCampaignListTableNotice: boolean
         showCampaignFormNotice: boolean

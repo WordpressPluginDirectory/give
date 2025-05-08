@@ -3,10 +3,12 @@
 namespace Give\DonationForms;
 
 use Exception;
+use Give\DonationForms\OrphanedForms\Actions\Assets as OrphanedFormsAssets;
 use Give\DonationForms\Actions\AddHoneyPotFieldToDonationForms;
 use Give\DonationForms\Actions\DispatchDonateControllerDonationCreatedListeners;
 use Give\DonationForms\Actions\DispatchDonateControllerSubscriptionCreatedListeners;
 use Give\DonationForms\Actions\PrintFormMetaTags;
+use Give\DonationForms\Actions\RegisterFormEntity;
 use Give\DonationForms\Actions\ReplaceGiveReceiptShortcodeViewWithDonationConfirmationIframe;
 use Give\DonationForms\Actions\SanitizeDonationFormPreviewRequest;
 use Give\DonationForms\Actions\StoreBackwardsCompatibleFormMeta;
@@ -33,6 +35,7 @@ use Give\DonationForms\Migrations\UpdateDonationLevelsSchema;
 use Give\DonationForms\Repositories\DonationFormRepository;
 use Give\DonationForms\Routes\AuthenticationRoute;
 use Give\DonationForms\Routes\DonateRoute;
+use Give\DonationForms\Routes\DonationFormsEntityRoute;
 use Give\DonationForms\Routes\ValidationRoute;
 use Give\DonationForms\Shortcodes\GiveFormShortcode;
 use Give\DonationForms\V2\ListTable\Columns\DonationCountColumn;
@@ -100,6 +103,13 @@ class ServiceProvider implements ServiceProviderInterface
         ]);
 
         /**
+         * @since 4.2.0
+         */
+        Hooks::addAction('init', RegisterFormEntity::class);
+        Hooks::addAction('rest_api_init', DonationFormsEntityRoute::class);
+        Hooks::addAction('admin_init', OrphanedFormsAssets::class);
+
+        /**
          * @since 3.16.0
          * Print form meta tags
          */
@@ -109,6 +119,7 @@ class ServiceProvider implements ServiceProviderInterface
     }
 
     /**
+     * @since 4.1.0 Add support to campaign details page (the "Forms" tab)
      * @since 3.15.0
      */
     private function registerAsyncData()
@@ -125,7 +136,8 @@ class ServiceProvider implements ServiceProviderInterface
         // Load assets on the admin form list pages
         $isLegacyAdminFormListPage = isset($_GET['post_type']) && 'give_forms' === $_GET['post_type'] && ! isset($_GET['page']);
         $isAdminFormListPage = isset($_GET['page']) && 'give-forms' === $_GET['page'];
-        if ($isLegacyAdminFormListPage || $isAdminFormListPage) {
+        $isAdminCampaignDetailsPage = isset($_GET['page'], $_GET['id']) && 'give-campaigns' === $_GET['page'];
+        if ($isLegacyAdminFormListPage || $isAdminFormListPage || $isAdminCampaignDetailsPage) {
             Hooks::addAction('admin_enqueue_scripts', LoadAsyncDataAssets::class);
         }
 
