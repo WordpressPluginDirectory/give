@@ -3,9 +3,9 @@ Contributors: givewp, dlocc, webdevmattcrom, ravinderk, mehul0810, kevinwhoffman
 Donate link: https://go.givewp.com/home
 Tags: donation, donate, recurring donations, fundraising, crowdfunding
 Requires at least: 6.5
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 4.2.1
+Stable tag: 4.3.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -272,6 +272,40 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 10. Use almost any payment gateway integration with GiveWP through our add-ons or by creating your own add-on.
 
 == Changelog ==
+
+= 4.3.2: June 11th, 2025 =
+* Enhancement: Improved accessibility across form modal and new tab display styles
+* Enhancement: Added focus border to donation confirmation donor-dashboard link
+* Enhancement: Added aria-support to donation confirmation secure badge
+* Enhancement: Replaced definition list tags in donation confirmation field lists for better semantic structure
+* Fix: Resolved an issue with additional keyboard focus on new donor wall items
+* Fix: Resolved accessibility issues with event ticket elements
+* Fix: Resolved an issue with aria labels in form-grid progress bar
+* Fix: Resolved an issue with campaign colors for grid and block goal progress
+* Fix: Resolved backwards compatibility issues for campaign_id in legacy objects and gateways
+* Fix: Resolved an issue where the Campaign Grid block does not show any Campaigns when the Campaign filter is used
+* Fix: Resolved an issue with the visual form builder route user roles
+* Fix: Resolved an issue with error focus on Date and File fields
+* Fix: Resolved an issue where some servers were experiencing a "Missing PayPal webhook header" error
+* Fix: Resolved a conflict with custom text fields that use the same name as the billing address block field names
+
+= 4.3.1: May 30th, 2025 =
+* Fix: Resolved an issue with the Donor wall when filtering by multiple form IDs
+* Security: Updated permissions for various endpoints (CVE-2025-4571)
+
+= 4.3.0: May 21st, 2025 =
+* New: Added a new Campaign form block and shortcode
+* Enhancement: Improved the performance of the campaign form list table
+* Enhancement: Updated the donation list table to include it's associated Campaign
+* Enhancement: Recurring donation renewals using Stripe will now include meta data
+* Enhancement: Made various improvements to the accessiblity of our donation forms
+* Enhancement: Updated our advanced migration system to offer the ability to rollback a failed migration
+* Enhancement: Updated the campaign admin screen with a sticky header UI
+* Fix: Updated the form to campaign migration to take into account the possibility of multiple upgraded forms which would sometimes cause it to fail
+* Fix: Resolved remaining WP 6.8 _load_textdomain_just_in_time notice for GiveWP core
+* Fix: Updated campaigns admin screen to be translatable
+* Fix: Resolved an issue with sites in subdirectories that are using visual form builder forms were producing an error
+* Fix: Resolved an issue where some custom fields were not showing up on the donor dashboard
 
 = 4.2.1: May 7th, 2025 =
 * Fix: Resolved an issue with PayPal Donations and Fee Recovery when using the global option for donor forced opt-in
