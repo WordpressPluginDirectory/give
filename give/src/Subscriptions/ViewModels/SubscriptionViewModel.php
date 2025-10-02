@@ -3,9 +3,9 @@
 namespace Give\Subscriptions\ViewModels;
 
 use Give\API\REST\V3\Routes\Donors\ValueObjects\DonorAnonymousMode;
+use Give\Framework\PaymentGateways\Contracts\Subscription\SubscriptionTransactionsSynchronizable;
 use Give\Framework\PaymentGateways\PaymentGatewayRegister;
 use Give\Subscriptions\Models\Subscription;
-use Give\Framework\PaymentGateways\Contracts\Subscription\SubscriptionTransactionsSynchronizable;
 
 /**
  * @since 4.8.0
@@ -47,6 +47,7 @@ class SubscriptionViewModel
     }
 
     /**
+     * @since 4.10.0 added campaignId
      * @since 4.8.0
      */
     public function exports(): array
@@ -60,10 +61,11 @@ class SubscriptionViewModel
                 'lastName' => $donor ? $donor->lastName : '',
                 'gateway' => $this->getGatewayDetails(),
                 'projectedAnnualRevenue' => $this->subscription->projectedAnnualRevenue(),
+                'campaignId' => $this->subscription->campaign ? $this->subscription->campaign->id : null,
             ]
         );
 
-        if ( ! $this->includeSensitiveData) {
+        if (!$this->includeSensitiveData) {
             $sensitiveDataExcluded = [
                 'transactionId',
                 'gatewaySubscriptionId',
@@ -78,7 +80,7 @@ class SubscriptionViewModel
             }
         }
 
-        if (isset($this->anonymousMode ) && $this->anonymousMode->isRedacted() && $this->subscription->donor->isAnonymous()) {
+        if (isset($this->anonymousMode) && $this->anonymousMode->isRedacted() && $this->subscription->donor->isAnonymous()) {
             $anonymousDataRedacted = [
                 'donorId',
                 'firstName',
@@ -101,18 +103,21 @@ class SubscriptionViewModel
     }
 
     /**
+     * @since 4.10.0 Return null if subscription URL is not available
      * @since 4.8.0
      */
-    private function getGatewayDetails(): array
+    private function getGatewayDetails(): ?array
     {
-        if ( ! give(PaymentGatewayRegister::class)->hasPaymentGateway($this->subscription->gatewayId)) {
-            return [];
+        if (empty($this->subscription->gatewayId) || !give(PaymentGatewayRegister::class)->hasPaymentGateway($this->subscription->gatewayId)) {
+            return null;
         }
+
+        $subscriptionUrl = $this->subscription->gateway()->gatewayDashboardSubscriptionUrl($this->subscription);
 
         return array_merge(
             $this->subscription->gateway()->toArray(),
             [
-                'subscriptionUrl' => $this->subscription->gateway()->gatewayDashboardSubscriptionUrl($this->subscription),
+                'subscriptionUrl' => $subscriptionUrl ?: null,
                 'canSync' => $this->subscription->gateway()->subscriptionModule instanceof SubscriptionTransactionsSynchronizable
             ]
         );

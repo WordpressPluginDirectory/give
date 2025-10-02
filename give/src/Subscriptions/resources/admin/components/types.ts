@@ -1,5 +1,6 @@
-import {Donor} from '@givewp/donors/admin/components/types';
+import { Campaign } from '@givewp/campaigns/admin/components/types';
 import {Donation} from '@givewp/donations/admin/components/types';
+import {Donor} from '@givewp/donors/admin/components/types';
 
 type PaymentGateway = {
     id: string;
@@ -7,7 +8,7 @@ type PaymentGateway = {
     label: string;
     subscriptionUrl: string;
     canSync: boolean;
-}
+};
 
 /**
  * @since 4.8.0
@@ -42,22 +43,23 @@ type Money = {
 };
 
 /**
- * @since 4.8.0
+ * @since 4.10.0
  */
-type DateTime = {
-    date: string;
-    timezone: string;
-    timezone_type: number;
+type Form = {
+    id: number;
+    title: string;
 };
 
 /**
+ * @since 4.10.0 added _embedded
  * @since 4.8.0
  */
 export type Subscription = {
     id: number;
     donationFormId: number;
-    createdAt: DateTime;
-    renewsAt: DateTime;
+    campaignId: number;
+    createdAt: string; // ISO 8601 string
+    renewsAt: string; // ISO 8601 string
     donorId: number;
     period: SubscriptionPeriod;
     frequency: number;
@@ -73,5 +75,11 @@ export type Subscription = {
     donations?: Donation[];
     gateway?: PaymentGateway;
     projectedAnnualRevenue?: Money;
-
+    _embedded?: {
+        'givewp:campaign': Campaign[];
+        // the first item in the array is the array of donations
+        'givewp:donations': [Donation[]]
+        'givewp:donor': Donor[];
+        'givewp:form': Form[];
+    };
 };
