@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4024e5c40650c55f1d01a04f357bfe08
+class ComposerStaticInitf5d861c3b73bc87d200afc0d0cefad0b
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -14,79 +14,71 @@ class ComposerStaticInit4024e5c40650c55f1d01a04f357bfe08
     );
 
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'S' =>
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Stripe\\' => 7,
             'Sample\\' => 7,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\Container\\' => 14,
             'PayPalHttp\\' => 11,
             'PayPalCheckoutSdk\\' => 18,
         ),
-        'M' => 
+        'M' =>
         array (
             'Money\\' => 6,
         ),
-        'G' => 
+        'G' =>
         array (
             'Give\\' => 5,
         ),
-        'F' => 
-        array (
-            'FormatObjectList\\' => 17,
-        ),
-        'C' => 
+        'C' =>
         array (
             'Composer\\Installers\\' => 20,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Ctype\\' => 
+        'Symfony\\Polyfill\\Ctype\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Stripe\\' => 
+        'Stripe\\' =>
         array (
             0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
-        'Sample\\' => 
+        'Sample\\' =>
         array (
             0 => __DIR__ . '/..' . '/paypal/paypal-checkout-sdk/samples',
         ),
-        'Psr\\Container\\' => 
+        'Psr\\Container\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'PayPalHttp\\' => 
+        'PayPalHttp\\' =>
         array (
             0 => __DIR__ . '/..' . '/paypal/paypalhttp/lib/PayPalHttp',
         ),
-        'PayPalCheckoutSdk\\' => 
+        'PayPalCheckoutSdk\\' =>
         array (
             0 => __DIR__ . '/..' . '/paypal/paypal-checkout-sdk/lib/PayPalCheckoutSdk',
         ),
-        'Money\\' => 
+        'Money\\' =>
         array (
             0 => __DIR__ . '/..' . '/moneyphp/money/src',
         ),
-        'Give\\' => 
+        'Give\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'FormatObjectList\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/kjohnson/format-object-list/src',
-        ),
-        'Composer\\Installers\\' => 
+        'Composer\\Installers\\' =>
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
@@ -105,17 +97,15 @@ class ComposerStaticInit4024e5c40650c55f1d01a04f357bfe08
         'TCPDF_FONTS' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_fonts.php',
         'TCPDF_FONT_DATA' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_font_data.php',
         'TCPDF_IMAGES' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_images.php',
-        'TCPDF_IMPORT' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_import.php',
-        'TCPDF_PARSER' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_parser.php',
         'TCPDF_STATIC' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_static.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4024e5c40650c55f1d01a04f357bfe08::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4024e5c40650c55f1d01a04f357bfe08::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit4024e5c40650c55f1d01a04f357bfe08::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf5d861c3b73bc87d200afc0d0cefad0b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf5d861c3b73bc87d200afc0d0cefad0b::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf5d861c3b73bc87d200afc0d0cefad0b::$classMap;
 
         }, null, ClassLoader::class);
     }
